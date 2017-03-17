@@ -1,0 +1,4 @@
+download/*
+data/*
+sample_submission.csv
+*/*.ipynb
