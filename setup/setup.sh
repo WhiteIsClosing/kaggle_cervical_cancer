@@ -9,4 +9,4 @@ mkdir -p ../data/valid/Type_1/ ../data/valid/Type_2/ ../data/valid/Type_3/
 mkdir -p ../data/test/unknown/
 
 ### Preprocess image and split into train and valid ###
-
+python downsize_and_split.py
