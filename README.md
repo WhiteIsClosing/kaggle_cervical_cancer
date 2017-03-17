@@ -4,9 +4,12 @@
 
 80% training, 20% validation
 <pre><code>
-cd setup
+git clone https://github.com/YuelongGuo/kaggle_cervical_cancer.git
+cd kaggle_cervical_cancer/setup
 ./setup.sh
 </code></pre>
+
+Assuming your downloaded data is in direcotry: "./download/"
 
 ## Benchmark 0 - VGG model with training and testing only
 In directory "benchmark_0_lecture1_vgg"
