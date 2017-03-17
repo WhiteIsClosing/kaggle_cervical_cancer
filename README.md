@@ -12,6 +12,7 @@ cd setup
 In directory "benchmark_0_lecture1_vgg"
 
 fast.ai lecture 1 VGG model, 5 epoches
+
 score 0.97463
 
 ## Benchmark 1 - VGG model with dense layer re-trained
