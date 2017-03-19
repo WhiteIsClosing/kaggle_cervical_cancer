@@ -19,8 +19,4 @@ fast.ai lecture 1 VGG model, 5 epoches
 score 0.97463
 
 ## Benchmark 1 - VGG model with dense layer re-trained
-In directory "benchmark_1_lecture2_vgg_retrain"
-
-fast.ai lecture 2 VGG model, drop softmax layer, add softmax(3)
-
-score 0.97901 - no significant improvement
+This implementation currently contains bug.
