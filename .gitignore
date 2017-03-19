@@ -1,6 +1,7 @@
 download/*
 data/*
 sample_submission.csv
+*/*.ipynb
 */*.pyc
 */*.h5
 */*.csv

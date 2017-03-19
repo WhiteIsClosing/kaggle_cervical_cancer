@@ -1,11 +1,15 @@
 import os, sys
-from scipy.misc import imread,imresize,imsave    # I have scipy 0.19.0
+# from scipy.misc import imread,imresize,imsave    # I have scipy 0.19.0
+from PIL import Image
 
-### Downsize image to 224 * 224 * 3 ###
+### Downsize image such that min(width, height) = 512 px * 3 color ###
 def resize(img_path):
-    img = imread(img_path)
-    img = imresize(img, (224,224,3))
-    return img
+    try:
+        img = Image.open(img_path)
+        img.thumbnail((512,512), Image.ANTIALIAS)
+        return img
+    except IOError:
+        print "cannot create thumbnail for '%s'" % img_path
 
 ### Decide whether the image gets saved to train or valid ###
 ### There is better ways to implement this, but since only run once ###
@@ -18,7 +22,7 @@ def save_train_img_to_path(img_path, img, typ):
         new_path = os.path.join("../data/valid", typ, img_name)
     else:
         new_path = os.path.join("../data/train", typ, img_name)
-    imsave(new_path, img)
+    img.save(new_path, "JPEG")
 
 ### Decide whether the additional image gets saved to train or valid ###
 def save_addl_img_to_path(img_path, img, typ):
@@ -30,7 +34,7 @@ def save_addl_img_to_path(img_path, img, typ):
         new_path = os.path.join("../data/additional/valid", typ, img_name)
     else:
         new_path = os.path.join("../data/additional/train", typ, img_name)
-    imsave(new_path, img)
+    img.save(new_path, "JPEG")
 
 ### train
 def process_train():
@@ -42,8 +46,8 @@ def process_train():
                 try:
                     img = resize(impath)
                     save_train_img_to_path(impath, img, typ)
-                except:
-                    pass
+                except IOError:
+                    print "Training IO Error."
 
 ### test 
 def process_test():
@@ -53,9 +57,9 @@ def process_test():
             print "processing " + impath
             try:
                 img = resize(impath)
-                imsave(os.path.join("../data/test/unknown/", os.path.basename(impath)), img)
-            except:
-                pass
+                img.save(os.path.join("../data/test/unknown/", os.path.basename(impath)), "JPEG")
+            except IOError:
+                print "Testing IO Error."
 
 ### additional 
 def process_additional():
@@ -66,9 +70,12 @@ def process_additional():
                 print "processing " + impath
                 try:
                     img = resize(impath)
-                    save_addl_img_to_path(impath, img, typ)
-                except:
-                    pass
+                    try:
+                        save_addl_img_to_path(impath, img, typ)
+                    except:
+                        pass
+                except IOError:
+                    print "Additional IO Error."
 
 ### main ###
 if __name__ == "__main__":
