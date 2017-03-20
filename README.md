@@ -18,5 +18,11 @@ fast.ai lecture 1 VGG model, 5 epoches
 
 score 0.97463
 
-## Benchmark 1 - VGG model with dense layer re-trained
-This implementation currently contains bug.
+## Benchmark 1 - VGG model with additional images
+In directory "benchmark_1_lecture1_additional"
+
+fast.ai lecture 1 VGG model
+
+Additional images trained with 5 epoches, train images trained with 1 epoches.
+
+score 0.88499
